@@ -1,16 +1,17 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
-import { Head } from "@inertiajs/vue3";
+import { Link, Head, usePage } from "@inertiajs/vue3";
 const props = defineProps({
     title: String,
 });
+const page = usePage();
+console.log(page.props);
 </script>
 
 <template>
-    <Head v-bind="props" />
+    <Head :title="`${page.props.appName} | ${props.title}`" />
     <header class="header">
         <div class="header-inner">
-            <h1>{{ props.title }}</h1>
+            <h1>{{ page.props.appName }}</h1>
             <ul>
                 <li>
                     <Link :href="route('app')">Home</Link>
