@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\TodosController;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
 
@@ -17,3 +18,9 @@ use Inertia\Inertia;
 Route::get('/', function () {
     return Inertia::render('App');
 })->name('app');
+
+Route::prefix('todo-list')->group(function () {
+    Route::get('/', [TodosController::class, 'index'])->name('todo-list.index');
+    Route::post('/create', [TodosController::class, 'create'])->name('todo-list.create');
+    Route::delete('/delete/{id}', [TodosController::class, 'delete'])->name('todo-list.delete');
+});

@@ -12,11 +12,16 @@ console.log(page.props);
     <header class="header">
         <div class="header-inner">
             <h1>{{ page.props.appName }}</h1>
-            <ul>
-                <li>
-                    <Link :href="route('app')">Home</Link>
-                </li>
-            </ul>
+            <nav class="nav">
+                <ul class="menu">
+                    <li>
+                        <Link :href="route('app')">Home</Link>
+                    </li>
+                    <li>
+                        <Link :href="route('todo-list.index')">TodoList</Link>
+                    </li>
+                </ul>
+            </nav>
         </div>
     </header>
     <main class="main">
@@ -33,6 +38,12 @@ console.log(page.props);
     align-items: center;
     width: 1000px;
     margin: 0 auto;
+}
+.menu {
+    display: flex;
+    list-style: none;
+    gap: 10px;
+    font-size: 18px;
 }
 .main {
     width: 1000px;
