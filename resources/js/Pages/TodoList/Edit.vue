@@ -1,6 +1,6 @@
 <script setup>
 import Layout from "../../Layout/Default.vue";
-import { useForm, Link } from "@inertiajs/vue3";
+import { useForm } from "@inertiajs/vue3";
 const props = defineProps({
     todo: {
         type: Object,
