@@ -37,7 +37,7 @@ function deleteTodo(id) {
 function filetering(e) {
     const status = e.target.value;
     router.visit(route("todo-list.index", { status: status }), {
-        only: ["todos"],
+        only: ["todos", "queryParams"],
     });
 }
 </script>
