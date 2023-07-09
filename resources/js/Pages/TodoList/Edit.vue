@@ -13,8 +13,8 @@ const editForm = useForm("createTodo", {
     status: props.todo.status,
 });
 
-function update() {
-    editForm.put(route("todo-list.update", props.todo.id), {
+function update(id) {
+    editForm.put(route("todo-list.update", id), {
         preserveScroll: true,
         onSuccess: () => {},
     });
@@ -24,7 +24,7 @@ function update() {
     <Layout title="TodoList">
         <fieldset>
             <legend>Edit Todo</legend>
-            <form @submit.prevent="update">
+            <form @submit.prevent="update(props.todo.id)">
                 <input type="text" v-model="editForm.content" />
                 <select v-model="editForm.status">
                     <option value="Todo">Todo</option>
