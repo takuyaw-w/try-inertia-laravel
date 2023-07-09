@@ -1,13 +1,16 @@
 <script setup>
 import Layout from "../../Layout/Default.vue";
-import { useForm, Link } from "@inertiajs/vue3";
+import { useForm, Link, router } from "@inertiajs/vue3";
 const props = defineProps({
     todos: {
         type: Array,
         required: true,
     },
+    queryParams: {
+        type: String,
+        default: "all",
+    },
 });
-
 const createForm = useForm("createTodo", {
     content: "",
     status: "Todo",
@@ -30,9 +33,25 @@ function deleteTodo(id) {
         });
     }
 }
+
+function filetering(e) {
+    const status = e.target.value;
+    router.visit(route("todo-list.index", { status: status }), {
+        only: ["todos"],
+    });
+}
 </script>
 <template>
     <Layout title="TodoList">
+        <fieldset>
+            <legend>filter</legend>
+            <select @change="filetering" :value="props.queryParams">
+                <option value="all">すべて</option>
+                <option value="Todo">Todoのみ</option>
+                <option value="Doing">Doingのみ</option>
+                <option value="Done">Doneのみ</option>
+            </select>
+        </fieldset>
         <fieldset>
             <legend>Add Todo</legend>
             <form @submit.prevent="register">
@@ -48,7 +67,7 @@ function deleteTodo(id) {
                 </div>
             </form>
         </fieldset>
-        <ul v-if="props.todos.length >= 0">
+        <ul v-if="props.todos.length >= 1">
             <li v-for="todo in props.todos" :key="todo.id">
                 <div class="todo">
                     <h3 class="todo-title">{{ todo.content }}</h3>

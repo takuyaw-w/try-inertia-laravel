@@ -10,11 +10,19 @@ use Inertia\Inertia;
 class TodosController extends Controller
 {
     //一覧を表示する
-    public function index()
+    public function index(Request $req)
     {
-        return Inertia::render('TodoList/Index', [
-            'todos' => Todos::all()
-        ]);
+        $queryParams = $req->query('status');
+
+        if (is_null($queryParams) || $queryParams == 'all') {
+            return Inertia::render('TodoList/Index', [
+                'todos' => Todos::all()
+            ]);
+        } else {
+            return Inertia::render('TodoList/Index', [
+                'todos' => Todos::where('status',  $queryParams)->get(),
+                'queryParams' => $queryParams,
+            ]);}
     }
 
     // Todoを作成する
