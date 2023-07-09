@@ -1,7 +1,8 @@
 <script setup>
-import { Link } from "@inertiajs/vue3";
+import Layout from "../Layout/Default.vue";
 </script>
 <template>
-    <h1>Hello World</h1>
-    <Link :href="route('app')">Home</Link>
+    <Layout title="Home">
+        <p>これはテストで作成しているアプリケーションです。</p>
+    </Layout>
 </template>
