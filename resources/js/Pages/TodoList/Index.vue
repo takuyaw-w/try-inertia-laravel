@@ -56,7 +56,11 @@ function deleteTodo(id) {
                         {{ todo.status }}
                     </div>
                     <div class="todo-actions">
-                        <Link href="/" as="button">編集</Link>
+                        <Link
+                            :href="route('todo-list.edit', todo.id)"
+                            as="button"
+                            >編集</Link
+                        >
                         <button @click="deleteTodo(todo.id)">削除</button>
                     </div>
                 </div>

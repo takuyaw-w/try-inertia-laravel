@@ -22,7 +22,7 @@ class TodosController extends Controller
     {
         $todo = resolve(Todos::class);
         $todo->content = $request->safe()->content;
-        $todo->status = $request->status;
+        $todo->status = $request->safe()->status;
         $todo->save();
         return redirect()->route('todo-list.index');
     }
@@ -32,6 +32,25 @@ class TodosController extends Controller
     {
         $todo = Todos::find($id);
         $todo->delete();
+        return redirect()->route('todo-list.index');
+    }
+
+    // Todoを編集する
+    public function edit(int $id)
+    {
+        $todo = Todos::find($id);
+        return Inertia::render('TodoList/Edit', [
+            'todo' => $todo
+        ]);
+    }
+
+    // todoを更新する
+    public function update(TodoRequst $request, int $id)
+    {
+        $todo = Todos::find($id);
+        $todo->content = $request->safe()->content;
+        $todo->status = $request->safe()->status;
+        $todo->save();
         return redirect()->route('todo-list.index');
     }
 }
