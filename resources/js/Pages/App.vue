@@ -3,5 +3,5 @@ import { Link } from "@inertiajs/vue3";
 </script>
 <template>
     <h1>Hello World</h1>
-    <Link href="/">Home</Link>
+    <Link :href="route('app')">Home</Link>
 </template>
