@@ -19,10 +19,10 @@ Route::get('/', function () {
     return Inertia::render('App');
 })->name('app');
 
-Route::prefix('todo-list')->group(function () {
-    Route::get('/', [TodosController::class, 'index'])->name('todo-list.index');
-    Route::post('/create', [TodosController::class, 'create'])->name('todo-list.create');
-    Route::delete('/delete/{id}', [TodosController::class, 'delete'])->name('todo-list.delete');
-    Route::get('/edit/{id}', [TodosController::class, 'edit'])->name('todo-list.edit');
-    Route::put('/update/{id}', [TodosController::class, 'update'])->name('todo-list.update');
+Route::group(['prefix' => 'todo-list', 'as' => 'todo-list.'], function() {
+    Route::get('/', [TodosController::class, 'index'])->name('index');
+    Route::post('/create', [TodosController::class, 'create'])->name('create');
+    Route::delete('/delete/{id}', [TodosController::class, 'delete'])->name('delete');
+    Route::get('/edit/{id}', [TodosController::class, 'edit'])->name('edit');
+    Route::put('/update/{id}', [TodosController::class, 'update'])->name('update');
 });
