@@ -1,10 +1,14 @@
 <script setup>
 import { Link, Head, usePage } from "@inertiajs/vue3";
+import { computed } from "vue";
 const props = defineProps({
     title: String,
 });
 const page = usePage();
-console.log(page.props);
+
+const isLoggedin = computed(() => {
+    return page.props.auth.user !== null;
+});
 </script>
 
 <template>
@@ -19,6 +23,14 @@ console.log(page.props);
                     </li>
                     <li>
                         <Link :href="route('todo-list.index')">TodoList</Link>
+                    </li>
+                    <li>
+                        <Link :href="route('auth.login')">Login</Link>
+                    </li>
+                    <li v-if="isLoggedin">
+                        <Link :href="route('auth.logout')" method="post"
+                            >Logout</Link
+                        >
                     </li>
                 </ul>
             </nav>
