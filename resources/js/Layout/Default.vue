@@ -24,7 +24,7 @@ const isLoggedin = computed(() => {
                     <li>
                         <Link :href="route('todo-list.index')">TodoList</Link>
                     </li>
-                    <li>
+                    <li v-if="!isLoggedin">
                         <Link :href="route('auth.login')">Login</Link>
                     </li>
                     <li v-if="isLoggedin">
