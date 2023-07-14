@@ -31,6 +31,7 @@ class AuthController extends Controller
         } else {
             // ログイン失敗
             $request->session()->flash('message', 'メールアドレスか、パスワードが間違っています');
+
             return redirect()->route('auth.login');
         }
     }
