@@ -22,7 +22,8 @@ class TodosController extends Controller
             return Inertia::render('TodoList/Index', [
                 'todos' => Todos::where('status',  $queryParams)->get(),
                 'queryParams' => $queryParams,
-            ]);}
+            ]);
+        }
     }
 
     // Todoを作成する
