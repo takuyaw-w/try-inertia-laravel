@@ -16,11 +16,11 @@ class TodosController extends Controller
 
         if (is_null($queryParams) || $queryParams == 'all') {
             return Inertia::render('TodoList/Index', [
-                'todos' => Todos::all()
+                'todos' => Todos::orderBy('id', 'desc')->paginate(5)
             ]);
         } else {
             return Inertia::render('TodoList/Index', [
-                'todos' => Todos::where('status',  $queryParams)->get(),
+                'todos' => Todos::where('status',  $queryParams)->orderBy('id', 'desc')->paginate(5),
                 'queryParams' => $queryParams,
             ]);
         }

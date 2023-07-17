@@ -3,7 +3,7 @@ import Layout from "../../Layout/Default.vue";
 import { useForm, Link, router } from "@inertiajs/vue3";
 const props = defineProps({
     todos: {
-        type: Array,
+        type: Object,
         required: true,
     },
     queryParams: {
@@ -67,24 +67,44 @@ function filetering(e) {
                 </div>
             </form>
         </fieldset>
-        <ul v-if="props.todos.length >= 1">
-            <li v-for="todo in props.todos" :key="todo.id">
-                <div class="todo">
-                    <h3 class="todo-title">{{ todo.content }}</h3>
-                    <div :class="`todo-status ${todo.status.toLowerCase()}`">
-                        {{ todo.status }}
-                    </div>
-                    <div class="todo-actions">
-                        <Link
-                            :href="route('todo-list.edit', todo.id)"
-                            as="button"
-                            >編集</Link
+        <div v-if="props.todos.data.length >= 1">
+            <ul>
+                <li v-for="todo in props.todos.data" :key="todo.id">
+                    <div class="todo">
+                        <h3 class="todo-title">{{ todo.content }}</h3>
+                        <div
+                            :class="`todo-status ${todo.status.toLowerCase()}`"
                         >
-                        <button @click="deleteTodo(todo.id)">削除</button>
+                            {{ todo.status }}
+                        </div>
+                        <div class="todo-actions">
+                            <Link
+                                :href="route('todo-list.edit', todo.id)"
+                                as="button"
+                                >編集</Link
+                            >
+                            <button @click="deleteTodo(todo.id)">削除</button>
+                        </div>
                     </div>
-                </div>
-            </li>
-        </ul>
+                </li>
+            </ul>
+            <ul class="pagination">
+                <li v-for="(link, k) of props.todos.links" :key="k">
+                    <Link
+                        class="pagination-item"
+                        v-if="link.url !== null"
+                        :href="
+                            route('todo-list.index', {
+                                page: link.url.split('?')[1].split('=')[1],
+                                status: props.queryParams,
+                            })
+                        "
+                        v-html="link.label"
+                    />
+                    <span v-else class="pagination-item" v-html="link.label" />
+                </li>
+            </ul>
+        </div>
         <div v-else>
             <p>Empty...</p>
         </div>
@@ -117,5 +137,18 @@ function filetering(e) {
 .todo-actions {
     display: flex;
     gap: 10px;
+}
+.pagination {
+    display: flex;
+    gap: 10px;
+    list-style: none;
+    justify-content: center;
+}
+.pagination-item {
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    transition: 0.1s;
+    background-color: #fff;
 }
 </style>
