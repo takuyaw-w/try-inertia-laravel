@@ -19,16 +19,16 @@ const isLoggedin = computed(() => {
             <nav class="nav">
                 <ul class="menu">
                     <li>
-                        <Link :href="route('app')">Home</Link>
+                        <Link :href="$route('app')">Home</Link>
                     </li>
                     <li>
-                        <Link :href="route('todo-list.index')">TodoList</Link>
+                        <Link :href="$route('todo-list.index')">TodoList</Link>
                     </li>
                     <li v-if="!isLoggedin">
-                        <Link :href="route('auth.login')">Login</Link>
+                        <Link :href="$route('auth.login')">Login</Link>
                     </li>
                     <li v-if="isLoggedin">
-                        <Link :href="route('auth.logout')" method="post"
+                        <Link :href="$route('auth.logout')" method="post"
                             >Logout</Link
                         >
                     </li>

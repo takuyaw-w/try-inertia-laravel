@@ -50,7 +50,7 @@ function login() {
             <div v-if="form.hasErrors">
                 <p v-for="error of form.errors">{{ error }}</p>
             </div>
-            <Link as="button" :href="route('auth.register')">Register</Link>
+            <Link as="button" :href="$route('auth.register')">Register</Link>
         </fieldset>
     </Layout>
 </template>

@@ -79,7 +79,7 @@ function filetering(e) {
                         </div>
                         <div class="todo-actions">
                             <Link
-                                :href="route('todo-list.edit', todo.id)"
+                                :href="$route('todo-list.edit', todo.id)"
                                 as="button"
                                 >編集</Link
                             >
@@ -94,7 +94,7 @@ function filetering(e) {
                         class="pagination-item"
                         v-if="link.url !== null"
                         :href="
-                            route('todo-list.index', {
+                            $route('todo-list.index', {
                                 page: link.url.split('?')[1].split('=')[1],
                                 status: props.queryParams,
                             })
